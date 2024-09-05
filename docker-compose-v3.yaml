@@ -1,0 +1,19 @@
+version: '4.0'
+
+services:
+  redis-node-7508:
+    image: redis:latest
+    ports:
+      - 7508:6379
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7508
+    volumes:
+      - ./7508:/redis
+    command: redis-server /redis/redis.conf
+
+networks:
+  redis-cluster-compose:
+    driver: bridge
+       
+      

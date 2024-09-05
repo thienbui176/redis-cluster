@@ -1,0 +1,9 @@
+redis-cli -h redis-node-7501 -p 7501 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7502 -p 7502 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7503 -p 7503 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7504 -p 7504 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7505 -p 7505 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7506 -p 7506 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7507 -p 7507 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7508 -p 7508 CONFIG SET requirepass 123123
+redis-cli -h redis-node-7509 -p 7509 CONFIG SET requirepass 123123

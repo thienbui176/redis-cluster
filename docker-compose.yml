@@ -1,0 +1,106 @@
+version: '3.8'
+
+networks:
+  redis-cluster-compose:
+    driver: bridge
+
+services:
+  redis-node-7500:
+    container_name: redis_node_7500
+    image: redis:latest
+    ports:
+      - 7500:7500
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7500
+    volumes:
+      - ./7500:/redis
+    command: redis-server /redis/redis.conf
+  redis-node-7501:
+    container_name: redis_node_7501
+    image: redis:latest
+    ports:
+      - 7501:7501
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7501
+    volumes:
+      - ./7501:/redis
+    command: redis-server /redis/redis.conf
+
+  redis-node-7502:
+    container_name: redis_node_7502
+    image: redis:latest
+    ports:
+      - 7502:7502
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7502
+    volumes:
+      - ./7502:/redis
+    command: redis-server /redis/redis.conf
+
+  redis-node-7503:
+    container_name: redis_node_7503
+    image: redis:latest
+    ports:
+      - 7503:7503
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7503
+    volumes:
+      - ./7503:/redis
+    command: redis-server /redis/redis.conf
+
+  redis-node-7504:
+    container_name: redis_node_7504
+    image: redis:latest
+    ports:
+      - 7504:7504
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7504
+    volumes:
+      - ./7504:/redis
+    command: redis-server /redis/redis.conf
+  
+  redis-node-7505:
+    container_name: redis_node_7505
+    image: redis:latest
+    ports:
+      - 7505:7505
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7505
+    volumes:
+      - ./7505:/redis
+    command: redis-server /redis/redis.conf
+  
+  redis-cluster-creator:
+    container_name: redis_cluster
+    image: redis:latest
+    ports:
+      - 7499:7499
+    networks:
+      - redis-cluster-compose
+    command: redis-cli -p 7499 --cluster create redis-node-7500:7500 redis-node-7501:7501 redis-node-7502:7502 redis-node-7503:7503 redis-node-7504:7504 redis-node-7505:7505 --cluster-replicas 1 --cluster-yes
+    depends_on:
+      - redis-node-7500
+      - redis-node-7501
+      - redis-node-7502
+      - redis-node-7503
+      - redis-node-7504
+      - redis-node-7505
+  
+    
+  redisinsight:
+    container_name: redis_insight
+    image: redis/redisinsight
+    ports:
+      - '8001:5540'
+    networks:
+      - redis-cluster-compose
+    volumes:
+      - ./redisinsight:/db
+    depends_on:
+      - redis-cluster-creator

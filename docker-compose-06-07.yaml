@@ -1,0 +1,27 @@
+version: '4.0'
+
+services:
+  redis-node-7506:
+    image: redis:latest
+    ports:
+      - 7506:7506
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7506
+    volumes:
+      - ./7506:/redis
+    command: redis-server /redis/redis.conf
+  redis-node-7507:
+    image: redis:latest
+    ports:
+      - 7507:7507
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7507
+    volumes:
+      - ./7507:/redis
+    command: redis-server /redis/redis.conf
+
+networks:
+  redis-cluster-compose:
+        

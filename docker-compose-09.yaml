@@ -1,0 +1,17 @@
+version: '4.3'
+
+services:
+  redis-node-7509:
+    image: redis:latest
+    ports:
+      - 7509:7509
+    networks:
+      - redis-cluster-compose
+    hostname: redis-node-7509
+    volumes:
+      - ./7509:/redis
+    command: redis-server /redis/redis.conf
+
+networks:
+  redis-cluster-compose:
+      
